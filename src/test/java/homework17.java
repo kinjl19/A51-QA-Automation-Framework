@@ -21,11 +21,7 @@ public class homework17 extends BaseTest {
         String url = "https://qa.koel.app/";
         driver.get(url);
 
-        WebElement regLink = driver.findElement(By.cssSelector("[href='registration']"));
-        regLink.click();
-
-        String regURL = "https://qa.koel.app/registration";
-        Assert.assertEquals(driver.getCurrentUrl(), regURL);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
 
         WebElement emUser = driver.findElement(By.cssSelector("[type='email']"));
         emUser.sendKeys("kinjal.borad@testpro.io");
@@ -35,6 +31,8 @@ public class homework17 extends BaseTest {
 
         WebElement emLogin = driver.findElement(By.cssSelector("[type='submit']"));
         emLogin.click();
+
+
 
         //driver.quit();
     }
