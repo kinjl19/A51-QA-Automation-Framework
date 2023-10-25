@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 public class homework17 extends BaseTest {
     @Test
-    public void registrationNavigation() {
+    public void addSongToPlaylist() {
 
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
@@ -26,7 +26,17 @@ public class homework17 extends BaseTest {
 
         String regURL = "https://qa.koel.app/registration";
         Assert.assertEquals(driver.getCurrentUrl(), regURL);
-        driver.quit();
+
+        WebElement emUser = driver.findElement(By.cssSelector("[type='email']"));
+        emUser.sendKeys("kinjal.borad@testpro.io");
+
+        WebElement emPswd = driver.findElement(By.cssSelector("[type='password']"));
+        emPswd.sendKeys("Ganesh#123");
+
+        WebElement emLogin = driver.findElement(By.cssSelector("[type='submit']"));
+        emLogin.click();
+
+        //driver.quit();
     }
 
 }
