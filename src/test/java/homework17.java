@@ -32,7 +32,11 @@ public class homework17 extends BaseTest {
         WebElement emLogin = driver.findElement(By.cssSelector("[type='submit']"));
         emLogin.click();
 
+        WebElement klSearch = driver.findElement(By.cssSelector("[type='search']"));
+        klSearch.sendKeys("midnight");
 
+        WebElement vAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
+        vAll.click();
 
         //driver.quit();
     }
