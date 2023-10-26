@@ -46,6 +46,10 @@ public class homework17 extends BaseTest {
 
         WebElement selPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[12]"));
         selPlaylist.click();
+
+        String adConfirm = "Added 1 song into kinjal";
+        Assert.assertEquals(driver.findElement(By.cssSelector("[class='alertify-logs top right']")).getText(), adConfirm);
+
         //driver.quit();
 
     }
