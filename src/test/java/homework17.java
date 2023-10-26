@@ -38,7 +38,16 @@ public class homework17 extends BaseTest {
         WebElement vAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
         vAll.click();
 
+        WebElement fList = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr"));
+        fList.click();
+
+        WebElement AddTo = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+        AddTo.click();
+
+        WebElement selPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[12]"));
+        selPlaylist.click();
         //driver.quit();
+
     }
 
 }
