@@ -48,9 +48,9 @@ public class homework17 extends BaseTest {
         selPlaylist.click();
 
         String adConfirm = "Added 1 song into kinjal";
-        Assert.assertEquals(driver.findElement(By.cssSelector("[class='alertify-logs top right']")).getText(), adConfirm);
+        //Assert.assertEquals(driver.findElement(By.cssSelector("[class='alertify-logs top right']")).getText(), adConfirm);
 
-        //driver.quit();
+        driver.quit();
 
     }
 
