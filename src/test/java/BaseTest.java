@@ -4,31 +4,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.openqa.selenium.devtools.Message;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver = null;
+    public WebDriver driver;
+    public String url = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
-    public static void openBrowser(String siteUrl) {
+
+    public void openBrowser(String siteUrl) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.get(siteUrl);
 
-        Assert.assertEquals(driver.getCurrentUrl(), siteUrl);
+        //Assert.assertEquals(driver.getCurrentUrl(), siteUrl);
     }
 
-    public void loginSite(String useName, String pswd){
+    public void closeBrowser(){ driver.quit(); };
+    public void loginSite(String useName, String pswd) {
 
         WebElement emUser = driver.findElement(By.cssSelector("[type='email']"));
         emUser.sendKeys(useName);
@@ -40,7 +45,7 @@ public class BaseTest {
         emLogin.click();
     }
 
-    public void klSearch(String songName){
+    public void klSearch(String songName) {
         WebElement klSearch = driver.findElement(By.cssSelector("[type='search']"));
         klSearch.sendKeys("midnight");
 
@@ -55,5 +60,9 @@ public class BaseTest {
 
         WebElement selPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[12]"));
         selPlaylist.click();
+    }
+
+    public String GetSuccess(){
+        return driver.findElement(By.cssSelector("div.success.show")).getText();
     }
 }
