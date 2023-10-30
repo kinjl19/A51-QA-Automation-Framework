@@ -67,6 +67,12 @@ public class BaseTest {
         playNxt.click();
 
     }
+
+    public void playSongn() {
+        WebElement playSng = driver.findElement((By.cssSelector("[title='Play or resume")));
+        playSng.click();
+
+    }
     public String GetSuccess(){
         return driver.findElement(By.cssSelector("div.success.show")).getText();
     }

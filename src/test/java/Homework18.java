@@ -8,9 +8,15 @@ public class Homework18 extends BaseTest {
     @Test
     public void playSong(){
         openBrowser("https://qa.koel.app/");
-        loginSite("kinjal.borad@testpro.io", "Ganesh#123");
+        loginSite("demo@class.com", "te$t$tudent");
         playNextSong();
-        confirmPlay();
-        
+        playSongn();
+        if(confirmPlay()){
+            System.out.println("Song is Playing!");
+        }
+        else{
+            System.out.println("Song is not Playing!");
+        }
+        closeBrowser();
     }
 }
