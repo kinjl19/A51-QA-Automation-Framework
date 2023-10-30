@@ -7,6 +7,10 @@ public class Homework18 extends BaseTest {
 
     @Test
     public void playSong(){
-
+        openBrowser("https://qa.koel.app/");
+        loginSite("kinjal.borad@testpro.io", "Ganesh#123");
+        playNextSong();
+        confirmPlay();
+        
     }
 }
