@@ -69,16 +69,45 @@ public class BaseTest {
     }
 
     public void playSongn() {
-        WebElement playSng = driver.findElement((By.cssSelector("[title='Play or resume")));
+        WebElement playSng = driver.findElement((By.cssSelector("[title='Play or resume']")));
         playSng.click();
 
+    }
+
+    public void deleteSong(){
+        if(confirmDelAval()){
+            WebElement delSong = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+            //*[@id="playlistWrapper"]/header/div[3]/span/button[2]
+            delSong.click();
+            WebElement del = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
+            del.click();
+            //driver.findElement(By.xpath("/html/body/div[3]/div/div/nav/button[2]")).click();
+        }
+        else{
+            driver.findElement(By.cssSelector("[title='Create a new playlist']")).click();
+            driver.findElement(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]")).click();
+            driver.findElement(By.xpath("//*[@id=\"playlists\"]/form/input")).sendKeys("Playlist2Delete");
+            driver.findElement(By.xpath("//*[@id=\"playlists\"]/form/input")).submit();
+            WebElement delSong = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+            delSong.click();
+            WebElement del = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
+            del.click();
+            //driver.findElement(By.xpath("/html/body/div[3]/div/div/nav/button[2]")).click();
+        }
     }
     public String GetSuccess(){
         return driver.findElement(By.cssSelector("div.success.show")).getText();
     }
 
     public boolean confirmPlay(){
-        boolean isPlaying = !driver.findElements(By.cssSelector("[title='Pause']")).isEmpty();
-        return isPlaying;
+        return !driver.findElements(By.cssSelector("[title='Pause']")).isEmpty();
+    }
+
+    public boolean confirmDelAval(){
+        return !driver.findElements(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")).isEmpty();
+    }
+
+    public String getConfirmDelete(){
+        return driver.findElement(By.cssSelector("div.success.show")).getText();
     }
 }
