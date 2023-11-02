@@ -1,9 +1,14 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework19 extends BaseTest {
+import java.time.Duration;
+
+public class Homework20 extends BaseTest {
     @Test
     public void deletePlaylist() {
+
         String confirmDelete = "playlist";
         this.openBrowser("https://qa.koel.app/");
         this.loginSite("demo@class.com", "te$t$tudent");
@@ -13,3 +18,4 @@ public class Homework19 extends BaseTest {
         closeBrowser();
     }
 }
+

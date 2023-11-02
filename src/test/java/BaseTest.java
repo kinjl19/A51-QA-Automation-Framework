@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.Message;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -13,6 +16,9 @@ import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver;
+    Duration TimeOut = Duration.ofSeconds(1);
+
+
     public String url = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
@@ -25,9 +31,11 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver,TimeOut);
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.get(siteUrl);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "//*[@id=\"app\"]/div/div/form/div[1]/img")));
 
         //Assert.assertEquals(driver.getCurrentUrl(), siteUrl);
     }
@@ -43,6 +51,9 @@ public class BaseTest {
 
         WebElement emLogin = driver.findElement(By.cssSelector("[type='submit']"));
         emLogin.click();
+        WebDriverWait wait = new WebDriverWait(driver,TimeOut);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "//*[@id=\"userBadge\"]/a[1]/img")));
+
     }
 
     public void klSearch(String songName) {
@@ -75,6 +86,7 @@ public class BaseTest {
     }
 
     public void deleteSong(){
+        WebDriverWait wait = new WebDriverWait(driver,TimeOut);
         if(confirmDelAval()){
             WebElement delSong = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
             //*[@id="playlistWrapper"]/header/div[3]/span/button[2]
@@ -85,9 +97,14 @@ public class BaseTest {
         }
         else{
             driver.findElement(By.cssSelector("[title='Create a new playlist']")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "//*[@id=\"playlists\"]/nav/ul/li[1]")));
+
             driver.findElement(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]")).click();
             driver.findElement(By.xpath("//*[@id=\"playlists\"]/form/input")).sendKeys("Playlist2Delete");
             driver.findElement(By.xpath("//*[@id=\"playlists\"]/form/input")).submit();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "//*[@id=\"playlists\"]/ul/li[3]/a")));
+
             WebElement delSong = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
             delSong.click();
             WebElement del = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
