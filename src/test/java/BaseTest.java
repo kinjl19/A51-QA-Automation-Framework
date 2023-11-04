@@ -1,10 +1,13 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.Message;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -12,6 +15,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.security.Key;
 import java.time.Duration;
 
 public class BaseTest {
@@ -111,6 +115,24 @@ public class BaseTest {
             del.click();
             //driver.findElement(By.xpath("/html/body/div[3]/div/div/nav/button[2]")).click();
         }
+    }
+
+    public String renameKLPlaylist() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver,TimeOut);
+
+            Actions act = new Actions(driver);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
+            WebElement selPlayList = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+            act.doubleClick(selPlayList).perform();
+            WebElement slPlayList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+            slPlayList.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+            slPlayList.sendKeys("Play1");
+            slPlayList.sendKeys(Keys.ENTER);
+
+            WebElement confirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+            return confirm.getText();
+
+
     }
     public String GetSuccess(){
         return driver.findElement(By.cssSelector("div.success.show")).getText();
