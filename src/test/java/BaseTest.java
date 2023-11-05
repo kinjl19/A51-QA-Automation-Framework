@@ -121,8 +121,9 @@ public class BaseTest {
         WebDriverWait wait = new WebDriverWait(driver,TimeOut);
 
             Actions act = new Actions(driver);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
-            WebElement selPlayList = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
+            //WebElement selPlayList = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+            WebElement selPlayList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
             act.doubleClick(selPlayList).perform();
             WebElement slPlayList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
             slPlayList.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
