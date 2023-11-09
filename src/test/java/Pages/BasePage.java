@@ -14,11 +14,11 @@ import java.time.Duration;
 
 public class BasePage {
 
-    WebDriver driver;
+    protected WebDriver driver;
 
-    WebDriverWait wait;
+    protected WebDriverWait wait;
 
-    Actions action;
+    protected Actions action;
 
     public BasePage(WebDriver dr){
         driver = dr;
@@ -27,16 +27,16 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement findElement(By locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public WebElement findElement(WebElement webElement){
+        return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void click (By locator){
-        findElement(locator).click();
+    public void click (WebElement webElement){
+        wait.until(ExpectedConditions.elementToBeClickable(webElement)).click();
     }
 
-    public void doubleClick(By locator){
-        action.doubleClick(findElement(locator)).perform();
+    public void doubleClick(WebElement webElement){
+        action.doubleClick(findElement(webElement)).perform();
     }
     //@BeforeSuite
     //static void setupClass() {
