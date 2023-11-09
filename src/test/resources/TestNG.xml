@@ -5,11 +5,10 @@
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginPage"/>
-            <class name="BasePage"/>
+            <class name="Pages.LoginPage"/>
+            <class name="Pages.BasePage"/>
             <class name="Homework22"/>
             <class name="BaseTest"/>
-            <class name="Homework18"/>
         </classes>
     </test>
 </suite>

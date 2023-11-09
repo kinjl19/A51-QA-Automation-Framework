@@ -1,16 +1,15 @@
-import org.openqa.selenium.WebDriver;
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework22 extends BasePage {
-    public Homework22(WebDriver dr) {
-        super(dr);
-    }
-
+public class Homework22 extends BaseTest {
     @Test
     public void renamePlaylist(){
         String newPlaylistName = "Test Playlist";
-        String updatedPlaylistMsg = "Updated playlist \"Test Playlist\"";
+        String updatedPlaylistMsg = "Updated playlist \"Test Playlist.\"";
+
+        this.openBrowser("https://qa.koel.app/");
 
         LoginPage lPage = new LoginPage(driver);
         HomePage hPage = new HomePage(driver);
@@ -19,6 +18,7 @@ public class Homework22 extends BasePage {
         hPage.doubleClickPlaylist();
         hPage.enterNewPlaylistName(newPlaylistName);
         Assert.assertEquals(hPage.getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
+        this.closeBrowser();
 
     }
 }

@@ -19,11 +19,14 @@ import java.security.Key;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver;
+    public static WebDriver driver = null;
+
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
     Duration TimeOut = Duration.ofSeconds(1);
 
 
-    public String url = "https://qa.koel.app/";
+    public static String url = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
